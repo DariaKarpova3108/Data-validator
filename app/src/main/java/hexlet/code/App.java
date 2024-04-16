@@ -14,6 +14,8 @@ public class App {
         System.out.println(schem.isValid(""));
         System.out.println(schem.isValid(null));
 
+        System.out.println("================");
+
         boolean result = schem.minLength(3).contains("ma").isValid("mama");
         System.out.println("1) " + result);
 
