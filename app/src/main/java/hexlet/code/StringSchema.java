@@ -1,6 +1,6 @@
 package hexlet.code;
 
-public class StringSchema extends Schema<String> {
+public class StringSchema extends BaseSchema<String> {
     private int length = 0;
     private String substring = null;
 
@@ -8,7 +8,7 @@ public class StringSchema extends Schema<String> {
     }
 
     @Override
-    public Schema<String> required() {
+    public BaseSchema<String> required() {
         setRequired(true);
         return this;
     }
@@ -25,11 +25,15 @@ public class StringSchema extends Schema<String> {
 
     @Override
     public boolean isValid(String element) {
-        if (isRequired() && element == null || element.equals("")) {
+        if (isRequired() && (element == null || element.equals(""))) {
             return false;
-        } else if (element.length() < length) {
+        }
+
+        if (this.length != 0 && element.length() < length) {
             return false;
-        } else if (substring != null && !element.contains(substring)) {
+        }
+
+        if (substring != null && !element.contains(substring)) {
             return false;
         }
         return true;

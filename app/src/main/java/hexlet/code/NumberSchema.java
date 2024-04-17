@@ -1,6 +1,6 @@
 package hexlet.code;
 
-public class NumberSchema extends Schema<Integer> {
+public class NumberSchema extends BaseSchema<Integer> {
     private Integer positive = null;
     private Integer[] diapazon = new Integer[2];
 
@@ -8,7 +8,7 @@ public class NumberSchema extends Schema<Integer> {
     }
 
     @Override
-    public Schema<Integer> required() {
+    public BaseSchema<Integer> required() {
         setRequired(true);
         return this;
     }
