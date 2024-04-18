@@ -1,6 +1,6 @@
 package hexlet.code;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -9,12 +9,12 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SchemaTests {
-    private static StringSchema stringSchema;
-    private static NumberSchema numberSchema;
-    private static MapSchema mapSchema;
+    private StringSchema stringSchema;
+    private NumberSchema numberSchema;
+    private MapSchema mapSchema;
 
-    @BeforeAll
-    public static void createSchema() {
+    @BeforeEach
+    public void createSchema() {
         Validator val = new Validator();
         stringSchema = val.string();
         numberSchema = val.number();
