@@ -45,7 +45,7 @@ public class MapSchema extends BaseSchema<Map<String, String>> {
                 String key = entry.getKey();
                 BaseSchema<String> check = schema.get(key);
                 String value = element.get(key);
-                if (!check.isValid(value)) {
+                if (!schema.containsKey(key) || !check.isValid(value)) {
                     return false;
                 }
             }
