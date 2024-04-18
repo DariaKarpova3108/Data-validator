@@ -8,7 +8,6 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 public class SchemaTests {
     private static StringSchema stringSchema;
     private static NumberSchema numberSchema;
@@ -93,7 +92,7 @@ public class SchemaTests {
     }
 
     @Test
-    public void MapSchemaTests() {
+    public void mapSchemaTests() {
         var actualInitially = mapSchema.isValid(null);
         var expectedInitially = true;
         assertThat(actualInitially).isEqualTo(expectedInitially);
@@ -129,4 +128,48 @@ public class SchemaTests {
         assertThat(actual6).isEqualTo(expected6);
     }
 
+    @Test
+    public void mapSchemaShapeTests() {
+        Validator val = new Validator();
+        Map<String, BaseSchema<String>> dataCheck = new HashMap<>();
+        dataCheck.put("firstKey", val.string().required());
+        dataCheck.put("secondKey", val.string().required().minLength(4));
+
+        mapSchema.shape(dataCheck);
+
+        Map<String, String> map = new HashMap<>();
+        map.put("firstKey", "");
+        map.put("secondKey", "");
+        var actual = mapSchema.isValid(map);
+        var expected = false;
+        assertThat(actual).isEqualTo(expected);
+
+        Map<String, String> map2 = new HashMap<>();
+        map2.put("firstKey", null);
+        map2.put("secondKey", "");
+        var actual2 = mapSchema.isValid(map2);
+        var expected2 = false;
+        assertThat(actual2).isEqualTo(expected2);
+
+        Map<String, String> map3 = new HashMap<>();
+        map3.put("firstKey", "key");
+        map3.put("secondKey", "val");
+        var actual3 = mapSchema.isValid(map3);
+        var expected3 = false;
+        assertThat(actual3).isEqualTo(expected3);
+
+        Map<String, String> map4 = new HashMap<>();
+        map4.put("firstKey", "key");
+        map4.put("secondKey", "balu");
+        var actual4 = mapSchema.isValid(map4);
+        var expected4 = true;
+        assertThat(actual4).isEqualTo(expected4);
+
+        Map<String, String> map5 = new HashMap<>();
+        map5.put("firstKey", "key");
+        map5.put("secondKey", "value");
+        var actual5 = mapSchema.isValid(map5);
+        var expected5 = true;
+        assertThat(actual5).isEqualTo(expected5);
+    }
 }

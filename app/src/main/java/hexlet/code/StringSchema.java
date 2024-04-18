@@ -1,14 +1,22 @@
 package hexlet.code;
 
 public class StringSchema extends BaseSchema<String> {
+    private boolean isRequired;
     private int length = 0;
     private String substring = null;
 
     public StringSchema() {
     }
 
-    @Override
-    public BaseSchema<String> required() {
+    public boolean isRequired() {
+        return isRequired;
+    }
+
+    public void setRequired(boolean required) {
+        isRequired = required;
+    }
+
+    public StringSchema required() {
         setRequired(true);
         return this;
     }

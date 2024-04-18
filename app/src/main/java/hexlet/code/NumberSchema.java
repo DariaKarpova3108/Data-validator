@@ -1,14 +1,22 @@
 package hexlet.code;
 
 public class NumberSchema extends BaseSchema<Integer> {
+    private boolean isRequired;
     private Integer positive = null;
     private Integer[] diapazon = new Integer[2];
 
     public NumberSchema() {
     }
 
-    @Override
-    public BaseSchema<Integer> required() {
+    public boolean isRequired() {
+        return isRequired;
+    }
+
+    public void setRequired(boolean required) {
+        isRequired = required;
+    }
+
+    public NumberSchema required() {
         setRequired(true);
         return this;
     }
@@ -39,7 +47,6 @@ public class NumberSchema extends BaseSchema<Integer> {
                 return false;
             }
         }
-
         return true;
     }
 }
