@@ -15,7 +15,7 @@ public class SchemaTests {
     private MapSchema mapSchema;
 
     @BeforeEach
-    public void createSchema() {
+    public final void createSchema() {
         Validator val = new Validator();
         stringSchema = val.string();
         numberSchema = val.number();
