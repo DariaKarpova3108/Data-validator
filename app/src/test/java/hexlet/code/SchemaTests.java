@@ -15,7 +15,8 @@ public class SchemaTests {
     private MapSchema mapSchema;
 
     /**
-     * Создает схемы валидации для строк, чисел и карт при запуске каждого теста.
+     * Initialize stringSchema, numberSchema, and mapSchema using a Validator instance.
+     * This method is executed before each test method.
      */
 
     @BeforeEach
