@@ -2,7 +2,7 @@ package hexlet.code;
 
 import hexlet.code.schemas.BaseSchema;
 
-public class StringSchema extends BaseSchema<String> {
+public final class StringSchema extends BaseSchema<String> {
     private boolean isRequired;
     private int length = 0;
     private String substring = null;

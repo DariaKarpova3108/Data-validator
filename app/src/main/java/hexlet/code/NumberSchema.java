@@ -2,7 +2,7 @@ package hexlet.code;
 
 import hexlet.code.schemas.BaseSchema;
 
-public class NumberSchema extends BaseSchema<Integer> {
+public final class NumberSchema extends BaseSchema<Integer> {
     private boolean isRequired;
     private Integer positive = null;
     private Integer[] diapazon = new Integer[2];

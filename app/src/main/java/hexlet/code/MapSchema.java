@@ -5,7 +5,7 @@ import hexlet.code.schemas.BaseSchema;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapSchema extends BaseSchema<Map<String, String>> {
+public final class MapSchema extends BaseSchema<Map<String, String>> {
     private boolean isRequired;
     private Integer size = null;
     private Map<String, BaseSchema<String>> schema;
