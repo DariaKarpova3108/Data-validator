@@ -40,6 +40,10 @@ public class NumberSchema extends BaseSchema<Integer> {
             return false;
         }
 
+        if (!isRequired() && this.positive != null && (element == null || element > this.positive)) {
+            return true;
+        }
+
         if (this.positive != null && element != null && element < this.positive) {
             return false;
         }
