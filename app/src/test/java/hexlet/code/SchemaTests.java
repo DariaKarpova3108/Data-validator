@@ -14,8 +14,12 @@ public class SchemaTests {
     private NumberSchema numberSchema;
     private MapSchema mapSchema;
 
+    /**
+     * Создает схемы валидации для строк, чисел и карт при запуске каждого теста.
+     */
+
     @BeforeEach
-    public final void createSchema() {
+    public void createSchema() {
         Validator val = new Validator();
         stringSchema = val.string();
         numberSchema = val.number();
