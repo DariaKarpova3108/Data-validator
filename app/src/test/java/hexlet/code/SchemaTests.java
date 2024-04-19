@@ -71,6 +71,14 @@ public class SchemaTests {
         var expectedInitially3 = true;
         assertThat(actualInitially3).isEqualTo(expectedInitially3);
 
+        var actualPositive2 = numberSchema.positive().isValid(0);
+        var expectedPositive2 = false;
+        assertThat(actualPositive2).isEqualTo(expectedPositive2);
+
+        var actualPositive3 = numberSchema.positive().isValid(1);
+        var expectedPositive3 = true;
+        assertThat(actualPositive3).isEqualTo(expectedPositive3);
+
         var actual = numberSchema.required().isValid(null);
         var expected = false;
         assertThat(actual).isEqualTo(expected);

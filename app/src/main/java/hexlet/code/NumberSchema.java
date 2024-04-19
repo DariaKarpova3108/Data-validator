@@ -24,7 +24,7 @@ public class NumberSchema extends BaseSchema<Integer> {
     }
 
     public NumberSchema positive() {
-        this.positive = 0;
+        this.positive = 1;
         return this;
     }
 
@@ -36,23 +36,22 @@ public class NumberSchema extends BaseSchema<Integer> {
 
     @Override
     public boolean isValid(Integer element) {
-        if (isRequired() && element == null) {
+        if (element == null) {
+            return !isRequired();
+        }
+
+        if (isRequired() && element <= 0) {
             return false;
         }
 
-        if (!isRequired() && this.positive != null && (element == null || element > this.positive)) {
-            return true;
-        }
-
-        if (this.positive != null && element != null && element < this.positive) {
+        if (this.positive != null && element <= 0) {
             return false;
         }
 
-        if (element != null && this.diapazon[0] != null && this.diapazon[1] != null) {
-            if (element < this.diapazon[0] || element > this.diapazon[1]) {
-                return false;
-            }
+        if (this.diapazon[0] != null && this.diapazon[1] != null) {
+            return element >= this.diapazon[0] && element <= this.diapazon[1];
         }
+
         return true;
     }
 }
