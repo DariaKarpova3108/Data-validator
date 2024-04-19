@@ -19,12 +19,6 @@ dependencies {
     testImplementation 'org.assertj:assertj-core:3.19.0'
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
-
 test {
     useJUnitPlatform()
 }
