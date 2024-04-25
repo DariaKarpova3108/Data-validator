@@ -31,13 +31,12 @@ public final class NumberSchema extends BaseSchema<Integer> {
         this.diapazon[0] = begin;
         this.diapazon[1] = end;
         addCheck("range", element -> {
-                    if (element != null && diapazon[0] != null && diapazon[1] != null) {
-                        return element >= diapazon[0] || element <= diapazon[1];
-                    } else {
-                        return false;
-                    }
-                }
-        );
+            if (element != null && diapazon[0] != null && diapazon[1] != null) {
+                return element >= diapazon[0] || element <= diapazon[1];
+            } else {
+                return false;
+            }
+        });
         return this;
     }
 }
