@@ -27,11 +27,17 @@ public final class NumberSchema extends BaseSchema<Integer> {
         return this;
     }
 
-    public NumberSchema range(int begin, int end) {
+    public NumberSchema range(Integer begin, Integer end) {
         this.diapazon[0] = begin;
         this.diapazon[1] = end;
-        addCheck("range", element -> element != null && diapazon[0] != null && diapazon[1] != null
-                && element >= diapazon[0] || element <= diapazon[1]);
+        addCheck("range", element -> {
+                    if (element != null && diapazon[0] != null && diapazon[1] != null) {
+                        return element >= diapazon[0] || element <= diapazon[1];
+                    } else {
+                        return false;
+                    }
+                }
+        );
         return this;
     }
 }

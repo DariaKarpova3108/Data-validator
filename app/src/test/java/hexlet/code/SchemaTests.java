@@ -92,11 +92,11 @@ public class SchemaTests {
         var expected2 = true;
         assertThat(actual2).isEqualTo(expected2);
 
-        var actual3 = numberSchema.positive().isValid(-10);
+        var actual3 = numberSchema.required().positive().isValid(-10);
         var expected3 = false;
         assertThat(actual3).isEqualTo(expected3);
 
-        var actual4 = numberSchema.positive().isValid(10);
+        var actual4 = numberSchema.required().positive().isValid(10);
         var expected4 = true;
         assertThat(actual4).isEqualTo(expected4);
 
@@ -107,6 +107,10 @@ public class SchemaTests {
         var actual6 = numberSchema.range(5, 10).isValid(10);
         var expected6 = true;
         assertThat(actual6).isEqualTo(expected6);
+
+        var actual7 = numberSchema.range(null, 10).isValid(5);
+        var expected7 = false;
+        assertThat(actual7).isEqualTo(expected7);
     }
 
     @Test
