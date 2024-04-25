@@ -68,55 +68,67 @@ public class SchemaTests {
         var expectedInitially = true;
         assertThat(actualInitially).isEqualTo(expectedInitially);
 
+        var actualInitially4 = numberSchema.isValid(-3);
+        var expectedInitially4 = true;
+        assertThat(actualInitially4).isEqualTo(expectedInitially4);
+
         var actualInitially2 = numberSchema.isValid(3);
         var expectedInitially2 = true;
         assertThat(actualInitially2).isEqualTo(expectedInitially2);
 
-        var actualInitially3 = numberSchema.positive().isValid(null);
+        numberSchema.positive();
+
+        var actualInitially3 = numberSchema.isValid(null);
         var expectedInitially3 = true;
         assertThat(actualInitially3).isEqualTo(expectedInitially3);
 
-        var actualPositive2 = numberSchema.positive().isValid(0);
+        var actualPositive2 = numberSchema.isValid(0);
         var expectedPositive2 = false;
         assertThat(actualPositive2).isEqualTo(expectedPositive2);
 
-        var actualPositive3 = numberSchema.positive().isValid(1);
+        var actualPositive3 = numberSchema.isValid(1);
         var expectedPositive3 = true;
         assertThat(actualPositive3).isEqualTo(expectedPositive3);
 
-        var actual = numberSchema.required().isValid(null);
+        numberSchema.required();
+
+        var actual = numberSchema.isValid(null);
         var expected = false;
         assertThat(actual).isEqualTo(expected);
 
-        var actual2 = numberSchema.required().isValid(5);
+        var actual2 = numberSchema.isValid(5);
         var expected2 = true;
         assertThat(actual2).isEqualTo(expected2);
 
-        var actual3 = numberSchema.required().positive().isValid(-10);
+        var actual3 = numberSchema.isValid(-10);
         var expected3 = false;
         assertThat(actual3).isEqualTo(expected3);
 
-        var actual4 = numberSchema.required().positive().isValid(10);
+        var actual4 = numberSchema.isValid(10);
         var expected4 = true;
         assertThat(actual4).isEqualTo(expected4);
 
-        var actual41 = numberSchema.required().positive().isValid(null);
+        var actual41 = numberSchema.isValid(null);
         var expected41 = false;
         assertThat(actual41).isEqualTo(expected41);
 
-        var actual5 = numberSchema.range(5, 10).isValid(-10);
+        numberSchema.range(5, 10);
+
+        var actual5 = numberSchema.isValid(-10);
         var expected5 = false;
         assertThat(actual5).isEqualTo(expected5);
 
-        var actual6 = numberSchema.range(5, 10).isValid(10);
+        var actual6 = numberSchema.isValid(10);
         var expected6 = true;
         assertThat(actual6).isEqualTo(expected6);
 
-        var actual7 = numberSchema.range(null, 10).isValid(5);
-        var expected7 = false;
+        var actual7 = numberSchema.isValid(5);
+        var expected7 = true;
         assertThat(actual7).isEqualTo(expected7);
 
-        var actual8 = numberSchema.range(8, null).isValid(null);
+        numberSchema.range(8, null);
+
+        var actual8 = numberSchema.isValid(null);
         var expected8 = false;
         assertThat(actual8).isEqualTo(expected8);
     }
