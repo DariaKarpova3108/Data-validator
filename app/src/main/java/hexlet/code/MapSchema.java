@@ -4,58 +4,46 @@ import hexlet.code.schemas.BaseSchema;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-public final class MapSchema extends BaseSchema<Map<String, String>> {
-    private boolean isRequired;
-    private Integer size = null;
-    private Map<String, BaseSchema<String>> schema;
+public final class MapSchema extends BaseSchema<Map<?, ?>> {
+    private Map<String, BaseSchema<?>> schema;
 
     public MapSchema() {
         this.schema = new HashMap<>();
     }
 
-    public boolean isRequired() {
-        return isRequired;
-    }
-
-    public void setRequired(boolean required) {
-        isRequired = required;
-    }
-
     public MapSchema required() {
         setRequired(true);
+        addCheck("required", Objects::nonNull);
         return this;
     }
 
     public MapSchema sizeof(int count) {
-        this.size = count;
+        addCheck("sizeof", element -> {
+            if (element == null) {
+                return true;
+            } else {
+                return element.size() == count;
+            }
+        });
         return this;
     }
 
-    @Override
-    public boolean isValid(Map<String, String> element) {
-        if (isRequired() && element == null) {
-            return false;
-        }
-
-        if (this.size != null && element != null && element.size() != this.size) {
-            return false;
-        }
-
-        if (this.schema != null && element != null) {
-            for (var entry : schema.entrySet()) {
-                String key = entry.getKey();
-                BaseSchema<String> check = schema.get(key);
-                String value = element.get(key);
-                if (!schema.containsKey(key) || !check.isValid(value)) {
-                    return false;
+    public void shape(Map<String, BaseSchema<?>> schemas) {
+        addCheck("shape", element -> {
+            if (this.schema != null && element != null) {
+                for (var entry : schema.entrySet()) {
+                    String key = entry.getKey();
+                    BaseSchema<?> check = schemas.get(key);
+                    var value = element.get(key);
+                    if (!schema.containsKey(key) || !check.isValid(value)) {
+                        return false;
+                    }
                 }
             }
-        }
-        return true;
-    }
-
-    public void shape(Map<String, BaseSchema<String>> schemas) {
+            return true;
+        });
         this.schema = schemas;
     }
 }

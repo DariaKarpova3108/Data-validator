@@ -2,56 +2,36 @@ package hexlet.code;
 
 import hexlet.code.schemas.BaseSchema;
 
+import java.util.Objects;
+
 public final class NumberSchema extends BaseSchema<Integer> {
-    private boolean isRequired;
-    private Integer positive = null;
     private Integer[] diapazon = new Integer[2];
 
     public NumberSchema() {
     }
 
-    public boolean isRequired() {
-        return isRequired;
-    }
-
-    public void setRequired(boolean required) {
-        isRequired = required;
-    }
-
     public NumberSchema required() {
         setRequired(true);
+        addCheck("required", Objects::nonNull);
         return this;
     }
 
     public NumberSchema positive() {
-        this.positive = 1;
+        addCheck("positive", element -> {
+            if (element == null) {
+                return true;
+            } else {
+                return element >= 1;
+            }
+        });
         return this;
     }
 
     public NumberSchema range(int begin, int end) {
         this.diapazon[0] = begin;
         this.diapazon[1] = end;
+        addCheck("range", element -> element != null && diapazon[0] != null && diapazon[1] != null
+                && element >= diapazon[0] || element <= diapazon[1]);
         return this;
-    }
-
-    @Override
-    public boolean isValid(Integer element) {
-        if (element == null) {
-            return !isRequired();
-        }
-
-        if (isRequired() && element <= 0) {
-            return false;
-        }
-
-        if (this.positive != null && element <= 0) {
-            return false;
-        }
-
-        if (this.diapazon[0] != null && this.diapazon[1] != null) {
-            return element >= this.diapazon[0] && element <= this.diapazon[1];
-        }
-
-        return true;
     }
 }
