@@ -21,7 +21,7 @@ public final class NumberSchema extends BaseSchema<Integer> {
             if (element == null) {
                 return true;
             } else {
-                return element >= 1;
+                return element > 0;
             }
         });
         return this;
