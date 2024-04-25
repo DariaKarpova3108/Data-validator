@@ -8,7 +8,6 @@ public final class StringSchema extends BaseSchema<String> {
     }
 
     public StringSchema required() {
-        setRequired(true);
         addCheck("required", element -> element != null && !element.equals(""));
         return this;
     }

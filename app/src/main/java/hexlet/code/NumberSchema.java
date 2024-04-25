@@ -11,7 +11,6 @@ public final class NumberSchema extends BaseSchema<Integer> {
     }
 
     public NumberSchema required() {
-        setRequired(true);
         addCheck("required", Objects::nonNull);
         return this;
     }

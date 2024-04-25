@@ -14,7 +14,6 @@ public final class MapSchema extends BaseSchema<Map<?, ?>> {
     }
 
     public MapSchema required() {
-        setRequired(true);
         addCheck("required", Objects::nonNull);
         return this;
     }
