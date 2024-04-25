@@ -149,7 +149,7 @@ public class SchemaTests {
     @Test
     public void mapSchemaShapeTests() {
         Validator val = new Validator();
-        Map<String, BaseSchema<?>> dataCheck = new HashMap<>();
+        Map<String, BaseSchema<String>> dataCheck = new HashMap<>();
         dataCheck.put("firstKey", val.string().required());
         dataCheck.put("secondKey", val.string().required().minLength(4));
 

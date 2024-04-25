@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public final class MapSchema extends BaseSchema<Map<?, ?>> {
-    private Map<String, BaseSchema<?>> schema;
+    private Map<String, BaseSchema<String>> schema;
 
     public MapSchema() {
         this.schema = new HashMap<>();
@@ -30,14 +30,14 @@ public final class MapSchema extends BaseSchema<Map<?, ?>> {
         return this;
     }
 
-    public void shape(Map<String, BaseSchema<?>> schemas) {
+    public void shape(Map<String, BaseSchema<String>> schemas) {
         addCheck("shape", element -> {
             if (this.schema != null && element != null) {
                 for (var entry : schema.entrySet()) {
                     String key = entry.getKey();
-                    BaseSchema<?> check = schemas.get(key);
+                    BaseSchema<String> check = schemas.get(key);
                     var value = element.get(key);
-                    if (!schema.containsKey(key) || !check.isValid(value)) {
+                    if (!schema.containsKey(key) || !check.isValid((String) value)) {
                         return false;
                     }
                 }

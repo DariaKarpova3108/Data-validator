@@ -20,10 +20,10 @@ public abstract class BaseSchema<T> {
         this.checks.put(check, predicate);
     }
 
-    public final boolean isValid(Object element) {
+    public final boolean isValid(T element) {
         for (var entry : this.checks.entrySet()) {
             var check = entry.getValue();
-            if (!check.test((T) element)) {
+            if (!check.test(element)) {
                 return false;
             }
         }
