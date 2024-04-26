@@ -33,7 +33,7 @@ public final class NumberSchema extends BaseSchema<Integer> {
             if (element == null) {
                 return true;
             } else if (diapazon[0] != null && diapazon[1] != null) {
-                return element >= diapazon[0] || element <= diapazon[1];
+                return element >= diapazon[0] && element <= diapazon[1];
             } else {
                 return false;
             }

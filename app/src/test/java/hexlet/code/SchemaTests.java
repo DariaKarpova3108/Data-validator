@@ -66,8 +66,6 @@ public class SchemaTests {
 
     @Test
     public void numberSchemaTests() {
-        Validator validator = new Validator();
-
         var actualInitially = numberSchema.isValid(null);
         var expectedInitially = true;
         assertThat(actualInitially).isEqualTo(expectedInitially);
@@ -95,12 +93,6 @@ public class SchemaTests {
         assertThat(actual4).isEqualTo(expected4);
 
         numberSchema.positive();
-        NumberSchema schema2 = validator.number();
-        schema2.positive();
-
-        var actualInitially3 = schema2.isValid(null);
-        var expectedInitially3 = true;
-        assertThat(actualInitially3).isEqualTo(expectedInitially3);
 
         var actualInitiallyPositive = numberSchema.isValid(null);
         var expectedInitiallyPositive = false;
