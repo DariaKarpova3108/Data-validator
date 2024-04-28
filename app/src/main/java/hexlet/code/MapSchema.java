@@ -6,19 +6,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public final class MapSchema extends BaseSchema<Map<?, ?>> {
-    private Map<String, BaseSchema<String>> schema;
+public final class MapSchema<K, V> extends BaseSchema<Map<K, V>> {
+    private Map<K, BaseSchema<V>> schema;
 
     public MapSchema() {
         this.schema = new HashMap<>();
     }
 
-    public MapSchema required() {
+    public MapSchema<K, V> required() {
         addCheck("required", Objects::nonNull);
         return this;
     }
 
-    public MapSchema sizeof(int count) {
+    public MapSchema<K, V> sizeof(int count) {
         addCheck("sizeof", element -> {
             if (element == null) {
                 return true;
@@ -29,14 +29,14 @@ public final class MapSchema extends BaseSchema<Map<?, ?>> {
         return this;
     }
 
-    public void shape(Map<String, BaseSchema<String>> schemas) {
+    public void shape(Map<K, BaseSchema<V>> schemas) {
         addCheck("shape", element -> {
             if (this.schema != null && element != null) {
                 for (var entry : schema.entrySet()) {
-                    String key = entry.getKey();
-                    BaseSchema<String> check = schemas.get(key);
+                    var key = entry.getKey();
+                    BaseSchema<V> check = schemas.get(key);
                     var value = element.get(key);
-                    if (!schema.containsKey(key) || !check.isValid((String) value)) {
+                    if (!schema.containsKey(key) || !check.isValid(value)) {
                         return false;
                     }
                 }

@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SchemaTests {
     private StringSchema stringSchema;
     private NumberSchema numberSchema;
-    private MapSchema mapSchema;
+    private MapSchema<String, String> mapSchema;
 
     /**
      * Initialize stringSchema, numberSchema, and mapSchema using a Validator instance.
@@ -25,6 +25,13 @@ public class SchemaTests {
         stringSchema = val.string();
         numberSchema = val.number();
         mapSchema = val.map();
+    }
+
+    @Test
+    public void testValidator() {
+        assertThat(stringSchema.getClass()).isEqualTo(StringSchema.class);
+        assertThat(numberSchema.getClass()).isEqualTo(NumberSchema.class);
+        assertThat(mapSchema.getClass()).isEqualTo(MapSchema.class);
     }
 
     @Test
